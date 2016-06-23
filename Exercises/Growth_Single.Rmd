@@ -1,0 +1,22 @@
+---
+title: "Fitting VBGF Exercise"
+author: "Derek H. Ogle, Northland College"
+date: "20-Aug-2016"
+output: pdf_document
+---
+
+Continue with the data.frame of lengths and ages (either assigned from the scales or from the age-length key) for ALL fish that you constructed in the previous exercise.  I suggest that you `source()` the script that you used to construct the combined data.frame.
+
+1. Examine the plot of TL versus age.  Observe the "shape" of the data (do the data look linear or curved, is there an obvious asymptote, are young fish well represented, how variable are lengths within ages).
+\vspace{24pt}
+1. Fit the typical parameterization of the von Bertalanffy growth function (VBGF).
+    a. Superimpose the best-fit VBGF on to the TL versus age plot.  Comment on model fit.
+    a. Construct a residual plot.  Comment on model fit.
+    a. Compute the correlation between parameter values.  Comment.
+    a. How realistic do the point estimates of $L_{\infty}$, $K$, and $t_{0}$ seem?
+    a. Carefully interpret the meaning of each parameter.
+    a. Construct 95% bootstrapped confidence intervals for each parameter.  Comment on the widths of these confidence intervals.  What explains this?
+    a. Predict the mean TL, with 95% confidence interval, for an age-6 Rock Bass.  Comment on the width of this confidence interval.  What explains this?
+\vspace{24pt}
+1. [**Time Permitting**] Repeat the previous question but using either the original, Gallucci and Quinn, or Mooij parameterization of the VBGF.  [Note that you can see the equations for these VBGFs with, for example, `growthFunShow("vonBertalanffy",param="GallucciQuinn",plot=TRUE)`.]
+    h. How does the fit of this model (and estimates of the common parameters) compare with the results from the typical VBGF?
