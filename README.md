@@ -1,2 +1,2 @@
 # RCourseKC2016
-Course materials for my R workshop at Kansas City AFS on 19 August 2016
+Materials for the "Age and Growth Analyses with R" CE course at AFS meeting in Kansas City 2016.

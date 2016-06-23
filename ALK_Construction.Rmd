@@ -1,0 +1,86 @@
+---
+title: "Construct Age-Length Keys"
+author: "Derek H. Ogle, Northland College"
+date: "20-Aug-2016"
+output: pdf_document
+geometry: margin=0.5in
+---
+
+```{r echo=FALSE, results='hide'}
+library(knitr)
+source("knitr_setup.R")
+```
+
+#Preliminaries
+```{r results='hide', warning=FALSE, message=FALSE}
+library(FSAdata)        # for SpotVA2 data
+library(FSA)            # for headtail(), alkPlot()
+library(dplyr)          # for filter(), mutate()
+library(nnet)           # for multinom()
+```
+
+# Loading and Preparing Data
+```{r}
+data(SpotVA2)
+headtail(SpotVA2)
+```
+
+```{r echo=FALSE, results='hide'}
+# ############################################################
+# This code demonstrates the use of is.na().  It is not needed
+# for the analysis.
+tmp <- headtail(SpotVA2) 
+cbind(tmp,is.na(tmp$age),!is.na(tmp$age))
+# ############################################################
+```
+
+```{r}
+sp.len <- filter(SpotVA2,is.na(age))
+headtail(sp.len)
+sp.age <- filter(SpotVA2,!is.na(age))
+headtail(sp.age)
+```
+
+```{r}
+sp.age.mod <- mutate(sp.age,lcat=lencat(tl,w=1))
+headtail(sp.age.mod)
+```
+
+# Observed Age-Length Key
+```{r}
+( raw <- xtabs(~lcat+age,data=sp.age.mod) )
+( ALK.obs <- prop.table(raw,margin=1) )
+```
+
+# Smoothed Age-Length Key
+```{r}
+mlr <- multinom(age~lcat,data=sp.age.mod,maxit=500)
+```
+```{r}
+lens <- 6:13
+ALK.sm <- predict(mlr,data.frame(lcat=lens),type="probs")
+row.names(ALK.sm) <- lens
+round(ALK.sm,3)
+```
+
+# Visualizing an Age-Length Key
+```{r fig.show='hold', message=FALSE}
+lblTL <- "Total Length (cm)"
+alkPlot(ALK.obs,xlab=lblTL)
+alkPlot(ALK.sm,xlab=lblTL)
+```
+```{r fig.show='hold'}
+alkPlot(ALK.sm,pal="gray",showLegend=TRUE,xlab=lblTL)
+alkPlot(ALK.sm,type="area",pal="gray",showLegend=TRUE,xlab=lblTL)
+```
+
+\newpage
+```{r fig.show='hold'}
+alkPlot(ALK.sm,type="lines",pal="gray",xlab=lblTL)
+alkPlot(ALK.sm,type="bubble",xlab=lblTL)
+```
+
+```{r echo=FALSE, results="hide", message=FALSE}
+purl2("ALK_Construction.Rmd",moreItems=c("knitr","rm"),out.dir="scripts",topnotes="AFS Kansas City 20-Aug-16")
+rm(hook1,tmp)
+```

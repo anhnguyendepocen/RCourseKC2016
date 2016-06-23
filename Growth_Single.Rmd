@@ -1,0 +1,88 @@
+---
+title: "Fitting a von Bertalanffy Growth Function"
+author: "Derek H. Ogle, Northland College"
+date: "20-Aug-2016"
+output: pdf_document
+geometry: margin=0.5in
+---
+
+```{r echo=FALSE, results='hide'}
+library(knitr)
+source("knitr_setup.R")
+```
+
+# Preliminaries
+```{r results='hide', warning=FALSE, message=FALSE}
+library(FSAdata)           # for TroutBR data
+library(FSA)               # for filterD(), headtail(), col2rgbt(), vbFuns(), vbStart()
+library(nlstools)          # for nlsBoot()
+```
+
+# Loading the Data and Some Preparations
+```{r message=FALSE}
+data(TroutBR)
+str(TroutBR)
+rbt <- filterD(TroutBR,species=="Rainbow")
+headtail(rbt)
+```
+
+```{r}
+xlbl <- "Age (yrs)"
+ylbl <- "Total Length (in)"
+clr <- col2rgbt("black",0.05)
+```
+
+# Fit Typical VBGF
+## Declare a Function
+```{r fig.width=8, fig.height=4, out.width='.98\\linewidth', par1=TRUE}
+vb <- vbFuns("Typical",msg=TRUE)
+vb
+```
+
+## Find Starting Values
+```{r fig.show='hold'}
+# Demos manual generation with plot ... LEFT plot
+svb <- vbStarts(tl~age,data=rbt,type="Typical",plot=TRUE,
+                fixed=list(Linf=30,K=0.3,t0=0))
+# Demos automatic generation ... RIGHT plot
+svb <- vbStarts(tl~age,data=rbt,type="Typical",plot=TRUE)
+```
+
+## Fit the Model
+```{r message=FALSE}
+fit1 <- nls(tl~vb(age,Linf,K,t0),data=rbt,start=svb)
+summary(fit1,correlation=TRUE)
+( cf <- coef(fit1) )
+confint(fit1)
+```
+\newpage
+```{r fig.width=7,fig.height=3,fig.show='hold'}
+boot1 <- nlsBoot(fit1,niter=1000)
+str(boot1)
+headtail(boot1$coefboot)
+confint(boot1,plot=TRUE,rows=1,cols=3)
+```
+
+\newpage
+## Make Predictions
+```{r}
+ageX <- 8
+predict(fit1,data.frame(age=ageX))
+pv <- apply(boot1$coefboot,MARGIN=1,FUN=vb,t=ageX)
+quantile(pv,c(0.025,0.975))
+```
+
+## Visualize the Fit
+```{r par1=TRUE, fig.show='hold'}
+plot(tl~age,data=rbt,xlab=xlbl,ylab=ylbl,pch=19,col=clr)
+curve(vb(x,cf),from=3,to=10,n=500,lwd=2,col="red",add=TRUE)
+```
+
+```{r warning=FALSE, fig.width=6}
+residPlot(fit1)
+```
+
+
+```{r echo=FALSE, results="hide", message=FALSE}
+purl2("Growth_Single.Rmd",moreItems="knitr",out.dir="scripts",topnotes="AFS Kansas City 20-Aug-16")
+```

@@ -1,0 +1,71 @@
+---
+title: "Comparing Age Assignments"
+author: "Derek H. Ogle, Northland College"
+date: "20-Aug-2016"
+output: pdf_document
+geometry: margin=0.5in
+---
+
+```{r echo=FALSE, results='hide'}
+library(knitr)
+source("knitr_setup.R")
+```
+
+#Preliminaries
+```{r results='hide', warning=FALSE, message=FALSE}
+library(FSAdata)                          # for StripedBass4 data
+library(FSA)                              # for headtail(), ageBias(), agePrecision()
+```
+
+# Loading Data
+```{r}
+data(StripedBass4)
+SB <- StripedBass4
+str(SB)
+headtail(SB)
+```
+
+# Examine Age Bias
+```{r}
+ab <- ageBias(reader2~reader1,data=SB)
+```
+
+```{r}
+summary(ab,what="table",flip.table=TRUE)
+summary(ab,what="symmetry")
+summary(ab,what="bias")
+```
+
+```{r fig.show='hold'}
+plot(ab)                                                        # Left
+plot(ab,diff=TRUE,show.n=FALSE)                                 # Right
+```
+```{r fig.show='hold'}
+plot(ab,diff=TRUE,show.n=FALSE,show.range=TRUE)                 # Left
+plot(ab,diff=TRUE,show.n=FALSE,show.pts=TRUE,transparency=1/25) # Right
+```
+```{r fig.width=6, fig.height=6}
+plot(ab,what="numbers",xlim=c(2,20),ylim=c(2,20))
+```
+
+# Examine Age Precision
+```{r}
+ap <- agePrecision(reader2~reader1,data=SB)
+summary(ap,what="difference",digits=1)
+summary(ap,what="absolute difference",digits=2)
+summary(ap,what="precision")
+```
+```{r eval=FALSE}
+summary(ap,what="detail")  # only some rows shown
+```
+```{r echo=FALSE}
+# ############################################################
+# This is a trick so that it appears that only some rows in
+# summary(ap,what="detail") are shown in the handout
+headtail(ap$detail,n=5)
+# ############################################################
+```
+
+```{r echo=FALSE, results="hide", message=FALSE}
+purl2("Age_Comparison.Rmd",moreItems="knitr",out.dir="scripts",topnotes="AFS Kansas City 20-Aug-16")
+```
