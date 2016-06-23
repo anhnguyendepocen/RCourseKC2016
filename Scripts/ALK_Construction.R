@@ -1,9 +1,9 @@
 # AFS Kansas City 20-Aug-16
 
-library(FSAdata)                            # for SpotVA2 data
-library(FSA)                                # for headtail(), alkPlot()
-library(dplyr)                              # for filter(), mutate()
-library(nnet)                               # for multinom()
+library(FSAdata)        # for SpotVA2 data
+library(FSA)            # for headtail(), alkPlot()
+library(dplyr)          # for filter(), mutate()
+library(nnet)           # for multinom()
 
 data(SpotVA2)
 headtail(SpotVA2)
@@ -44,4 +44,4 @@ alkPlot(ALK.sm,type="lines",pal="gray",xlab=lblTL)
 alkPlot(ALK.sm,type="bubble",xlab=lblTL)
 
 
-# Script created at 2016-06-23 11:36:09
+# Script created at 2016-06-23 18:50:47

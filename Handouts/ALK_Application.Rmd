@@ -8,14 +8,14 @@ geometry: margin=0.5in
 
 ```{r echo=FALSE, results='hide'}
 library(knitr)
-source("knitr_setup.R")
+source("../knitr_setup.R")
 ```
 
 # Source the Previous Script
 ```{r results='hide', fig.show='hide', message=FALSE}
 # Appropriately set the working directory before this
 # This also ran library(FSA) which also provides alkIndivAge(), Summarize(), hist()
-source("scripts/ALK_Construction.R")
+source("../scripts/ALK_Construction.R")
 ```
 \vspace{-24pt}
 ```{r}
@@ -50,5 +50,5 @@ lines(mean~fact2num(age),data=sp.sum,col="blue",lwd=2)
 ```
 
 ```{r echo=FALSE, results="hide", message=FALSE}
-purl2("ALK_Application.Rmd",moreItems="knitr",out.dir="scripts",topnotes="AFS Kansas City 20-Aug-16")
+purl2("ALK_Application.Rmd",moreItems="knitr",out.dir="../scripts",topnotes="AFS Kansas City 20-Aug-16")
 ```

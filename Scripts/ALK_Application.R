@@ -2,7 +2,7 @@
 
 # Appropriately set the working directory before this
 # This also ran library(FSA) which also provides alkIndivAge(), Summarize(), hist()
-source("scripts/ALK_Construction.R")
+source("../scripts/ALK_Construction.R")
 
 ls()
 headtail(sp.len)
@@ -23,4 +23,4 @@ plot(tl~age,data=sp.comb,ylab=lblTL,xlab="Age (yrs)",pch=19,col=col2rgbt("black"
 lines(mean~fact2num(age),data=sp.sum,col="blue",lwd=2)
 
 
-# Script created at 2016-06-23 11:48:11
+# Script created at 2016-06-23 18:53:38

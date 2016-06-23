@@ -13,7 +13,7 @@ Croaker2 <- mutate(Croaker2,logTL=log(tl))
 
 vbLKt <- tl~Linf[sex]*(1-exp(-K[sex]*(age-t0[sex])))
 fitLKt <- nls(vbLKt,data=Croaker2,start=svLKt)
-residPlot(fitLKt,col=rgb(0,0,0,1/3))
+residPlot(fitLKt,col=col2rgbt("black",1/3))
 
 vbLKt <- logTL~log(Linf[sex]*(1-exp(-K[sex]*(age-t0[sex]))))
 fitLKt <- nls(vbLKt,data=Croaker2,start=svLKt)
@@ -80,4 +80,4 @@ mnames <- c("{Omega}","{Linf}","{K}","{t0}","{Linf,K}","{Linf,t0}","{K,t0}","{Li
 aictab(ms,mnames)
 
 
-# Script created at 2016-06-23 12:53:28
+# Script created at 2016-06-23 18:52:53

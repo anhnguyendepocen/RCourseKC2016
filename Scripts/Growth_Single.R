@@ -1,8 +1,8 @@
 # AFS Kansas City 20-Aug-16
 
-library(FSAdata)                 # for TroutBR data
-library(FSA)                     # for filterD(), headtail(), col2rgbt(), vbFuns(), vbStart()
-library(nlstools)                # for nlsBoot()
+library(FSAdata)           # for TroutBR data
+library(FSA)               # for filterD(), headtail(), col2rgbt(), vbFuns(), vbStart()
+library(nlstools)          # for nlsBoot()
 
 data(TroutBR)
 str(TroutBR)
@@ -43,4 +43,4 @@ curve(vb(x,cf),from=3,to=10,n=500,lwd=2,col="red",add=TRUE)
 residPlot(fit1)
 
 
-# Script created at 2016-06-23 11:43:23
+# Script created at 2016-06-23 18:53:08

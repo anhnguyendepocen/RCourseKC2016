@@ -8,7 +8,7 @@ geometry: margin=0.5in
 
 ```{r echo=FALSE, results='hide'}
 library(knitr)
-source("knitr_setup.R")
+source("../knitr_setup.R")
 ```
 
 #Preliminaries
@@ -81,6 +81,6 @@ alkPlot(ALK.sm,type="bubble",xlab=lblTL)
 ```
 
 ```{r echo=FALSE, results="hide", message=FALSE}
-purl2("ALK_Construction.Rmd",moreItems=c("knitr","rm"),out.dir="scripts",topnotes="AFS Kansas City 20-Aug-16")
+purl2("ALK_Construction.Rmd",moreItems=c("knitr","rm"),out.dir="../scripts",topnotes="AFS Kansas City 20-Aug-16")
 rm(hook1,tmp)
 ```

@@ -8,7 +8,7 @@ geometry: margin=0.5in
 
 ```{r echo=FALSE, results='hide'}
 library(knitr)
-source("knitr_setup.R")
+source("../knitr_setup.R")
 ```
 
 # Preliminaries
@@ -84,5 +84,5 @@ residPlot(fit1)
 
 
 ```{r echo=FALSE, results="hide", message=FALSE}
-purl2("Growth_Single.Rmd",moreItems="knitr",out.dir="scripts",topnotes="AFS Kansas City 20-Aug-16")
+purl2("Growth_Single.Rmd",moreItems="knitr",out.dir="../scripts",topnotes="AFS Kansas City 20-Aug-16")
 ```
