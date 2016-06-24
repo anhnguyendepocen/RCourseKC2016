@@ -28,7 +28,7 @@ headtail(sp.age.mod)
 
 mlr <- multinom(age~lcat,data=sp.age.mod,maxit=500)
 
-lens <- 6:13
+lens <- seq(6,13,1)
 ALK.sm <- predict(mlr,data.frame(lcat=lens),type="probs")
 row.names(ALK.sm) <- lens
 round(ALK.sm,3)
@@ -44,4 +44,4 @@ alkPlot(ALK.sm,type="lines",pal="gray",xlab=lblTL)
 alkPlot(ALK.sm,type="bubble",xlab=lblTL)
 
 
-# Script created at 2016-06-23 18:50:47
+# Script created at 2016-06-23 20:26:25

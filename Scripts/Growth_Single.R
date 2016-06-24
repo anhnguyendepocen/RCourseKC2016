@@ -13,6 +13,8 @@ xlbl <- "Age (yrs)"
 ylbl <- "Total Length (in)"
 clr <- col2rgbt("black",0.05)
 
+plot(tl~age,data=rbt,pch=19,col=clr,xlab=xlbl,ylab=ylbl)
+
 vb <- vbFuns("Typical",msg=TRUE)
 vb
 
@@ -43,4 +45,4 @@ curve(vb(x,cf),from=3,to=10,n=500,lwd=2,col="red",add=TRUE)
 residPlot(fit1)
 
 
-# Script created at 2016-06-23 18:53:08
+# Script created at 2016-06-23 20:58:20

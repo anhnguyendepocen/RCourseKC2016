@@ -12,13 +12,16 @@ source("../knitr_setup.R")
 ```
 
 # Preliminaries
+\vspace{-12pt}
 ```{r results='hide', warning=FALSE, message=FALSE}
 library(FSAdata)           # for TroutBR data
 library(FSA)               # for filterD(), headtail(), col2rgbt(), vbFuns(), vbStart()
 library(nlstools)          # for nlsBoot()
 ```
 
+\vspace{-12pt}
 # Loading the Data and Some Preparations
+\vspace{-12pt}
 ```{r message=FALSE}
 data(TroutBR)
 str(TroutBR)
@@ -32,9 +35,16 @@ ylbl <- "Total Length (in)"
 clr <- col2rgbt("black",0.05)
 ```
 
+\vspace{-12pt}
+# Examine Plot of Data
+\vspace{-12pt}
+```{r}
+plot(tl~age,data=rbt,pch=19,col=clr,xlab=xlbl,ylab=ylbl)
+```
+
 # Fit Typical VBGF
 ## Declare a Function
-```{r fig.width=8, fig.height=4, out.width='.98\\linewidth', par1=TRUE}
+```{r}
 vb <- vbFuns("Typical",msg=TRUE)
 vb
 ```
@@ -48,6 +58,7 @@ svb <- vbStarts(tl~age,data=rbt,type="Typical",plot=TRUE,
 svb <- vbStarts(tl~age,data=rbt,type="Typical",plot=TRUE)
 ```
 
+\newpage
 ## Fit the Model
 ```{r message=FALSE}
 fit1 <- nls(tl~vb(age,Linf,K,t0),data=rbt,start=svb)
@@ -55,7 +66,7 @@ summary(fit1,correlation=TRUE)
 ( cf <- coef(fit1) )
 confint(fit1)
 ```
-\newpage
+
 ```{r fig.width=7,fig.height=3,fig.show='hold'}
 boot1 <- nlsBoot(fit1,niter=1000)
 str(boot1)
@@ -63,7 +74,6 @@ headtail(boot1$coefboot)
 confint(boot1,plot=TRUE,rows=1,cols=3)
 ```
 
-\newpage
 ## Make Predictions
 ```{r}
 ageX <- 8

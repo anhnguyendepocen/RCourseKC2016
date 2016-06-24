@@ -12,6 +12,7 @@ source("../knitr_setup.R")
 ```
 
 # Source the Previous Script
+\vspace{-12pt}
 ```{r results='hide', fig.show='hide', message=FALSE}
 # Appropriately set the working directory before this
 # This also ran library(FSA) which also provides alkIndivAge(), Summarize(), hist()

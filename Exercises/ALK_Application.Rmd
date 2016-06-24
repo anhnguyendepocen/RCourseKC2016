@@ -16,4 +16,6 @@ Continue with the data.frames and age-length keys constructed in the previous ex
     a. Plot the length-at-age with the mean length-at-age superimposed for all fish.
     a. Compare your results from questions a-f to someone else's results (or repeat those questions).  Did you both get the *exact* same results?  Why or why not?  If not, how different were they?
 \vspace{24pt}
+1. **Make sure to save a cleaned (no code that is not needed or results in an error) script!**
+\vspace{24pt}
 1. [**Time Permitting**] Repeat the previous question but using the **smoothed** age-length key.

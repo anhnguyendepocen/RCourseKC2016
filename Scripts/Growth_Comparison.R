@@ -8,6 +8,12 @@ data(Croaker2)
 str(Croaker2)
 Croaker2 <- mutate(Croaker2,logTL=log(tl))
 
+clr1 <- c("black","red")
+clr2 <- col2rgbt(clr1,1/5)
+xlbl <- "Age (yrs)"
+ylbl <- "Total Length (mm)"
+plot(tl~age,data=Croaker2,pch=19,col=clr2[sex],xlab=xlbl,ylab=ylbl)
+
 ( svOm <- vbStarts(tl~age,data=Croaker2) )
 ( svLKt <- Map(rep,svOm,c(2,2,2)) )
 
@@ -58,12 +64,9 @@ crM <- filterD(Croaker2,sex=="M")
 svM <- list(Linf=385,K=0.25,t0=-2)
 fitM <- nls(logTL~log(vb(age,Linf,K,t0)),data=crM,start=svM)
 
-clr1 <- c("black","red")
-clr2 <- col2rgbt(clr1,1/5)
 offset <- 0.04
 # Females
-plot(tl~I(age-offset),data=crF,pch=19,col=clr2[1],ylim=c(200,500),
-     xlab="Age (yrs)",ylab="Total Length (mm)")
+plot(tl~I(age-offset),data=crF,pch=19,col=clr2[1],ylim=c(200,500),xlab=xlbl,ylab=ylbl)
 curve(vb(x-offset,coef(fitF)),from=1,to=10,col=clr1[1],lwd=2,add=TRUE)
 # Males
 points(tl~I(age+offset),data=crM,pch=19,col=clr2[2])
@@ -80,4 +83,4 @@ mnames <- c("{Omega}","{Linf}","{K}","{t0}","{Linf,K}","{Linf,t0}","{K,t0}","{Li
 aictab(ms,mnames)
 
 
-# Script created at 2016-06-23 18:52:53
+# Script created at 2016-06-23 21:03:39

@@ -23,4 +23,4 @@ plot(tl~age,data=sp.comb,ylab=lblTL,xlab="Age (yrs)",pch=19,col=col2rgbt("black"
 lines(mean~fact2num(age),data=sp.sum,col="blue",lwd=2)
 
 
-# Script created at 2016-06-23 18:53:38
+# Script created at 2016-06-23 19:13:24

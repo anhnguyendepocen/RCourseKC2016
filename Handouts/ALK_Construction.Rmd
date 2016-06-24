@@ -57,7 +57,7 @@ headtail(sp.age.mod)
 mlr <- multinom(age~lcat,data=sp.age.mod,maxit=500)
 ```
 ```{r}
-lens <- 6:13
+lens <- seq(6,13,1)
 ALK.sm <- predict(mlr,data.frame(lcat=lens),type="probs")
 row.names(ALK.sm) <- lens
 round(ALK.sm,3)
@@ -81,6 +81,5 @@ alkPlot(ALK.sm,type="bubble",xlab=lblTL)
 ```
 
 ```{r echo=FALSE, results="hide", message=FALSE}
-purl2("ALK_Construction.Rmd",moreItems=c("knitr","rm"),out.dir="../scripts",topnotes="AFS Kansas City 20-Aug-16")
-rm(hook1,tmp)
+purl2("ALK_Construction.Rmd",moreItems="knitr",out.dir="../scripts",topnotes="AFS Kansas City 20-Aug-16")
 ```
