@@ -1,21 +1,24 @@
 ---
-title: "Construct Age-Length Keys"
-author: "Derek H. Ogle, Northland College"
-date: "20-Aug-2016"
+title: "Age-Length Key Construction"
+header-includes:
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyhead{}
+- \fancyfoot[RO,RE]{Ogle (AFS Kansas City, 20 Aug 2016)}
+- \fancyfoot[LE,LO]{Age-Length Key Construction}
 output: pdf_document
-geometry: margin=0.5in
+geometry: left=0.5in, right=0.5in, top=0.5in, bottom=0.75in
 ---
 
 ```{r echo=FALSE, results='hide'}
-library(knitr)
 source("../knitr_setup.R")
 ```
 
 #Preliminaries
 ```{r results='hide', warning=FALSE, message=FALSE}
 library(FSAdata)        # for SpotVA2 data
-library(FSA)            # for headtail(), alkPlot()
-library(dplyr)          # for filter(), mutate()
+library(FSA)            # for headtail(), filterD(), lencat(), alkPlot()
+library(dplyr)          # for mutate()
 library(nnet)           # for multinom()
 ```
 
@@ -35,9 +38,9 @@ cbind(tmp,is.na(tmp$age),!is.na(tmp$age))
 ```
 
 ```{r}
-sp.len <- filter(SpotVA2,is.na(age))
+sp.len <- filterD(SpotVA2,is.na(age))
 headtail(sp.len)
-sp.age <- filter(SpotVA2,!is.na(age))
+sp.age <- filterD(SpotVA2,!is.na(age))
 headtail(sp.age)
 ```
 
@@ -47,12 +50,14 @@ headtail(sp.age.mod)
 ```
 
 # Observed Age-Length Key
+\vspace{-12pt}
 ```{r}
 ( raw <- xtabs(~lcat+age,data=sp.age.mod) )
 ( ALK.obs <- prop.table(raw,margin=1) )
 ```
 
 # Smoothed Age-Length Key
+\vspace{-12pt}
 ```{r}
 mlr <- multinom(age~lcat,data=sp.age.mod,maxit=500)
 ```
