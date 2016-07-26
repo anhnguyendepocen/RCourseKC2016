@@ -1,13 +1,16 @@
 ---
 title: "Comparing von Bertalanffy Growth Functions"
-author: "Derek H. Ogle, Northland College"
-date: "20-Aug-2016"
+header-includes:
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyhead{}
+- \fancyfoot[RO,RE]{Ogle (AFS Kansas City, 20 Aug 2016)}
+- \fancyfoot[LE,LO]{Comparing von Bertalanffy Growth Functions}
 output: pdf_document
-geometry: margin=0.5in
+geometry: left=0.5in, right=0.5in, top=0.5in, bottom=0.75in
 ---
 
 ```{r echo=FALSE, results='hide'}
-library(knitr)
 source("../knitr_setup.R")
 ```
 
@@ -35,18 +38,21 @@ plot(tl~age,data=Croaker2,pch=19,col=clr2[sex],xlab=xlbl,ylab=ylbl)
 ```
 
 # Fitting Most Complex Model and Checking Assumptions
+\vspace{-15pt}
 ```{r}
 ( svOm <- vbStarts(tl~age,data=Croaker2) )
 ( svLKt <- Map(rep,svOm,c(2,2,2)) )
 ```
 
-```{r warning=FALSE, fig.width=6}
+\vspace{-12pt}
+```{r warning=FALSE, fig.width=6, out.height='2.4in'}
 vbLKt <- tl~Linf[sex]*(1-exp(-K[sex]*(age-t0[sex])))
 fitLKt <- nls(vbLKt,data=Croaker2,start=svLKt)
 residPlot(fitLKt,col=col2rgbt("black",1/3))
 ```
 
-```{r warning=FALSE, fig.width=6}
+\vspace{-12pt}
+```{r warning=FALSE, fig.width=6, out.height='2.4in'}
 vbLKt <- logTL~log(Linf[sex]*(1-exp(-K[sex]*(age-t0[sex]))))
 fitLKt <- nls(vbLKt,data=Croaker2,start=svLKt)
 residPlot(fitLKt,col=col2rgbt("black",1/3))
@@ -78,7 +84,9 @@ extraSS(fitLK,fitLt,fitKt,com=fitLKt,com.name="{Linf,K,t0}",
         sim.names=c("{Linf,K}","{Linf,t0}","{K,t0}"))
 ```
 
+\newpage
 # Can the Model be Reduced to Only One Parameter that Differs?
+\vspace{-12pt}
 ```{r}
 vbL <- logTL~log(Linf[sex]*(1-exp(-K*(age-t0))))
 ( svL <- Map(rep,svOm,c(2,1,1)) )
@@ -89,7 +97,9 @@ fitK <- nls(vbK,data=Croaker2,start=svK)
 extraSS(fitL,fitK,com=fitLK,com.name="{Linf,K}",sim.names=c("{Linf}","{K}"))
 ```
 
+\vspace{-12pt}
 # Summarize Final Model
+\vspace{-12pt}
 ```{r}
 summary(fitL,correlation=TRUE)
 round(cbind(coef(fitL),confint(fitL)),3)
@@ -117,6 +127,7 @@ curve(vb(x+offset,coef(fitM)),from=1,to=10,col=clr1[2],lwd=2,add=TRUE)
 legend("topleft",c("Female","Male"),pch=19,col=clr1,bty="n")
 ```
 
+\newpage
 # Using Information Criterion
 ## Fit the Only Other Model not Fit Above
 ```{r}

@@ -11,12 +11,14 @@ headtail(rbt)
 
 xlbl <- "Age (yrs)"
 ylbl <- "Total Length (in)"
-clr <- col2rgbt("black",0.05)
+clr <- col2rgbt("black",1/20)
 
 plot(tl~age,data=rbt,pch=19,col=clr,xlab=xlbl,ylab=ylbl)
 
 vb <- vbFuns("Typical",msg=TRUE)
 vb
+vb(8,Linf=300,K=0.3,t0=-1)
+vb(1:8,c(300,0.3,-1))
 
 # Demos manual generation with plot ... LEFT plot
 svb <- vbStarts(tl~age,data=rbt,type="Typical",plot=TRUE,
@@ -25,6 +27,8 @@ svb <- vbStarts(tl~age,data=rbt,type="Typical",plot=TRUE,
 svb <- vbStarts(tl~age,data=rbt,type="Typical",plot=TRUE)
 
 fit1 <- nls(tl~vb(age,Linf,K,t0),data=rbt,start=svb)
+residPlot(fit1)
+
 summary(fit1,correlation=TRUE)
 ( cf <- coef(fit1) )
 confint(fit1)
@@ -42,7 +46,5 @@ quantile(pv,c(0.025,0.975))
 plot(tl~age,data=rbt,xlab=xlbl,ylab=ylbl,pch=19,col=clr)
 curve(vb(x,cf),from=3,to=10,n=500,lwd=2,col="red",add=TRUE)
 
-residPlot(fit1)
 
-
-# Script created at 2016-06-23 20:58:20
+# Script created at 2016-07-25 20:26:40

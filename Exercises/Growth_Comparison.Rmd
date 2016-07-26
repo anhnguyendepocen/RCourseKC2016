@@ -9,17 +9,16 @@ output: pdf_document
 
 1. Plot FL versus age with different symbols for each sex.
     a. Do you foresee any model fitting problems with these data?
-    a. Do you observe any possible differences in growth between the sexes?
-1. Fit the *additive* errors (i.e., no logarithms) typical VBGF where all parameters differ by sex.
+    b. Do you observe any possible differences in growth between the sexes?
+2. Fit the *additive* errors (i.e., no logarithms) typical VBGF where all parameters differ by sex.
     a. Assess the assumptions from this model fit.
-    a. Compute point and bootstrapped 95% confidence interval estimates for each parameter in this model.  Describe any problems that you encountered.
-1. Find the most parsimonius model that is a subset of the model fit above.
+    b. Compute point and bootstrapped 95% confidence interval estimates for each parameter in this model.  Describe any problems that you encountered.
+3. Find the most parsimonius model that is a subset of the model fit above.
     a. Using either a likelihood ratio or extra sums-of-squares test.
-    a. Summarize (in words) the results of the most parsimonious model identified above.
-\vspace{24pt}
-1. [**Time Permitting**] Fit the typical VBGF seperately to both sexes.
+    b. Summarize (in words) the results of the most parsimonious model identified above.
+4. Fit the typical VBGF seperately to both sexes.
     a. Compute point and bootstrapped 95% confidence interval estimates for each parameter in the separate models.
-    a. Describe any problems that you encountered.
-    a. How do the point estimates from these separate models compare to the point estimates from the most complex model in #2 above?
-    a. Do you see any issues with the confidence intervals?  If so, describe.
-1. [**Time Permitting**] Construct a summary graphic that shows the growth trajectories superimposed on the observed data for both sexes.
+    b. Describe any problems that you encountered.
+    c. How do the point estimates from these separate models compare to the point estimates from the most complex model in #2 above?
+    d. Do you see any issues with the confidence intervals?  If so, describe.
+5. Construct a summary graphic that shows the growth trajectories superimposed on the observed data for both sexes.

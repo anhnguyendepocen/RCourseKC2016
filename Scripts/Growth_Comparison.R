@@ -83,4 +83,4 @@ mnames <- c("{Omega}","{Linf}","{K}","{t0}","{Linf,K}","{Linf,t0}","{K,t0}","{Li
 aictab(ms,mnames)
 
 
-# Script created at 2016-06-23 21:03:39
+# Script created at 2016-07-25 20:41:04

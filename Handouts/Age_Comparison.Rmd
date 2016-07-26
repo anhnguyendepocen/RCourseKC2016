@@ -1,23 +1,27 @@
 ---
 title: "Comparing Age Assignments"
-author: "Derek H. Ogle, Northland College"
-date: "20-Aug-2016"
+header-includes:
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyhead{}
+- \fancyfoot[RO,RE]{Ogle (AFS Kansas City, 20 Aug 2016)}
+- \fancyfoot[LE,LO]{Comparing Age Assignments}
 output: pdf_document
-geometry: margin=0.5in
+geometry: left=0.5in, right=0.5in, top=0.5in, bottom=0.75in
 ---
 
 ```{r echo=FALSE, results='hide'}
-library(knitr)
 source("../knitr_setup.R")
 ```
 
 #Preliminaries
 ```{r results='hide', warning=FALSE, message=FALSE}
-library(FSAdata)                          # for StripedBass4 data
-library(FSA)                              # for headtail(), ageBias(), agePrecision()
+library(FSAdata)  # for StripedBass4 data
+library(FSA)      # for headtail(), ageBias(), agePrecision()
 ```
 
 # Loading Data
+\vspace{-12pt}
 ```{r}
 data(StripedBass4)
 SB <- StripedBass4
@@ -26,6 +30,7 @@ headtail(SB)
 ```
 
 # Examine Age Bias
+\vspace{-12pt}
 ```{r}
 ab <- ageBias(reader2~reader1,data=SB)
 ```

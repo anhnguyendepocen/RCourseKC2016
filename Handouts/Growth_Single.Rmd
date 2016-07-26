@@ -1,13 +1,16 @@
 ---
 title: "Fitting a von Bertalanffy Growth Function"
-author: "Derek H. Ogle, Northland College"
-date: "20-Aug-2016"
+header-includes:
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyhead{}
+- \fancyfoot[RO,RE]{Ogle (AFS Kansas City, 20 Aug 2016)}
+- \fancyfoot[LE,LO]{Fitting a von Bertalanffy Growth Function}
 output: pdf_document
-geometry: margin=0.5in
+geometry: left=0.5in, right=0.5in, top=0.5in, bottom=0.75in
 ---
 
 ```{r echo=FALSE, results='hide'}
-library(knitr)
 source("../knitr_setup.R")
 ```
 
@@ -32,7 +35,7 @@ headtail(rbt)
 ```{r}
 xlbl <- "Age (yrs)"
 ylbl <- "Total Length (in)"
-clr <- col2rgbt("black",0.05)
+clr <- col2rgbt("black",1/20)
 ```
 
 \vspace{-12pt}
@@ -43,13 +46,19 @@ plot(tl~age,data=rbt,pch=19,col=clr,xlab=xlbl,ylab=ylbl)
 ```
 
 # Fit Typical VBGF
+\vspace{-12pt}
 ## Declare a Function
+\vspace{-12pt}
 ```{r}
 vb <- vbFuns("Typical",msg=TRUE)
 vb
+## Next two simply demonstrate how this function works
+vb(8,Linf=300,K=0.3,t0=-1)
+vb(1:8,c(300,0.3,-1))
 ```
 
 ## Find Starting Values
+\vspace{-12pt}
 ```{r fig.show='hold'}
 # Demos manual generation with plot ... LEFT plot
 svb <- vbStarts(tl~age,data=rbt,type="Typical",plot=TRUE,
@@ -59,9 +68,14 @@ svb <- vbStarts(tl~age,data=rbt,type="Typical",plot=TRUE)
 ```
 
 \newpage
-## Fit the Model
-```{r message=FALSE}
+## Check Assumptions
+```{r warning=FALSE, fig.width=6}
 fit1 <- nls(tl~vb(age,Linf,K,t0),data=rbt,start=svb)
+residPlot(fit1)
+```
+
+## Summarize the Model Fit
+```{r message=FALSE}
 summary(fit1,correlation=TRUE)
 ( cf <- coef(fit1) )
 confint(fit1)
@@ -74,6 +88,7 @@ headtail(boot1$coefboot)
 confint(boot1,plot=TRUE,rows=1,cols=3)
 ```
 
+\newpage
 ## Make Predictions
 ```{r}
 ageX <- 8
@@ -87,11 +102,6 @@ quantile(pv,c(0.025,0.975))
 plot(tl~age,data=rbt,xlab=xlbl,ylab=ylbl,pch=19,col=clr)
 curve(vb(x,cf),from=3,to=10,n=500,lwd=2,col="red",add=TRUE)
 ```
-
-```{r warning=FALSE, fig.width=6}
-residPlot(fit1)
-```
-
 
 ```{r echo=FALSE, results="hide", message=FALSE}
 purl2("Growth_Single.Rmd",moreItems="knitr",out.dir="../scripts",topnotes="AFS Kansas City 20-Aug-16")

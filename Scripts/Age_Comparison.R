@@ -1,7 +1,7 @@
 # AFS Kansas City 20-Aug-16
 
-library(FSAdata)                          # for StripedBass4 data
-library(FSA)                              # for headtail(), ageBias(), agePrecision()
+library(FSAdata)  # for StripedBass4 data
+library(FSA)      # for headtail(), ageBias(), agePrecision()
 
 data(StripedBass4)
 SB <- StripedBass4
@@ -36,4 +36,4 @@ headtail(ap$detail,n=5)
 # ############################################################
 
 
-# Script created at 2016-06-23 18:52:37
+# Script created at 2016-07-25 20:53:14
